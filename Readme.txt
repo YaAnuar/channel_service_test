@@ -52,7 +52,8 @@ python Migrate db upgrade
 
 
 2. Сборка доккер образов
-    # Перед сборкой не забудьте поменять данные для базы в файле curr_conv/Config.py и chat_id
+    # Перед сборкой не забудьте поменять данные для базы в файле curr_conv/Config.py
+    # Поменяйте localhost на host.docker.internal в строке 4
     # и chat_id в файле curr_conv/Config.py
     docker build curr_conv .
 
