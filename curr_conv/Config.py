@@ -14,7 +14,7 @@ class ProductionConfig(Config):
     # установите ваш чат id, получить можно у бота @getmyid_bot
     chat_id = '828686133'
 
-# return active config
+# Возвращаем активную конфигурацию
 available_configs = dict(development=DevelopmentConfig, production=ProductionConfig)
 selected_config = os.getenv("FLASK_ENV", "production")
 config = available_configs.get(selected_config, "production")
