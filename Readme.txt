@@ -2,6 +2,8 @@
 # убедитесь что у вас в базе уже нет таблицы order_table 
 # и вы не используете такую же в другом проекте
 # Я использую пользователя postgres с паролем postgres
+# Поменять пользователя базы данных и пароль 
+# вы можете в файле ./curr_conv/Config.py в строке 4
 
 pip install Flask-Migrate==2.6.0
 python Migrate db init
@@ -15,7 +17,6 @@ python Migrate db upgrade
     
     # Устанавливаем свой chat_id в 15 строке curr_conv/Config.py
     # chat_id получаем у бота @getmyid_bot
-    # Здесь же можно поменять пользователя базы данных/пароль в строке 4
     
     # Запускаем
     # python run.py
