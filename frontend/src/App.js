@@ -37,14 +37,6 @@ function App() {
   const sendPing = () => {
     socket.emit('ping');
   }
-  // useEffect(() => {
-  //   axios("http://localhost/api/table_data")
-  //     .then((res) => {
-  //       console.log(res.data)
-  //       setData(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   const columns = [
     {
@@ -72,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        <center>Таблица заказов</center>
+        <center>Каналсервис</center>
       </h1>
       <Table columns={columns} data={data} />
     </div>
