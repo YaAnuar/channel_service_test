@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        <center>Каналсервис</center>
+        <center>Заказы</center>
       </h1>
       <Table columns={columns} data={data} />
     </div>
