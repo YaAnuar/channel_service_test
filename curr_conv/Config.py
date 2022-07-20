@@ -1,7 +1,7 @@
 import os
 
 class Config(object):
-	SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost/orders'
+	SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@host.docker.internal/orders'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
