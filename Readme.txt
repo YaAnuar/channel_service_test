@@ -12,7 +12,42 @@ python Migrate db migrate
 python Migrate db upgrade
 
 
-1. Запуск исходников
+1. Сборка доккер образов
+    # Перед сборкой не забудьте поменять данные для базы в файле curr_conv/Config.py
+    # Поменяйте localhost на host.docker.internal в строке 4
+    # и chat_id в файле curr_conv/Config.py
+    docker build curr_conv .
+
+    # Убедитесь что в файле pg_hba.conf вашего postgres присутствует следующая строка
+
+host    all             all             0.0.0.0/0            md5
+
+    docker run --add-host host.docker.internal:host-gateway -p 2000:2000 curr_conv
+
+    # Чтобы заменить пользователя телеграм, которому отправляется сообщение
+    # В файле curr_conv/Config.py замените параметр chat_id в 15 строке
+    # который вы можете получить у бота @getmyid_bot отправив /start
+    # заменить текст в доккер контейнере вы можете с помощью Vscode - extensions - Remote - Containers
+    # вот инструкция: https://www.howtogeek.com/devops/how-to-edit-code-in-docker-containers-with-visual-studio-code/
+    # затем нужно сделать docker commit curr_conv curr_convimage:version1
+    # и запустить образ
+
+    # Таким же образом можно поменять пользователя базы данных/пароль в строке 4
+
+
+    cd frontend
+    docker build frontend . 
+    docker run -p 3000:3000 frontend
+    # Нажмите на консоль и Enter пару раз, если консоль зависла
+
+    # Затем перейдите на страницу http://127.0.0.1:3000/
+    # Таблица может загрузиться не сразу, подождите некоторое время
+    # Дальше перейдите по ссылке https://docs.google.com/spreadsheets/d/1wCa9s91PxlkQPDS6pxIsR7-2xB7NMDvvmo1VPhaV0Co/edit?usp=sharing
+
+    # и поменяйте какие нибудь значения в таблице
+
+
+2. Запуск исходников
     # Устанавливаем зависимости python
     pip install requirements.txt
     
@@ -50,41 +85,6 @@ python Migrate db upgrade
     # Надеюсь, у вас не получится:)
 
     # Если появятся ошибки пишите мне в телеграм @Goodguy111
-
-
-2. Сборка доккер образов
-    # Перед сборкой не забудьте поменять данные для базы в файле curr_conv/Config.py
-    # Поменяйте localhost на host.docker.internal в строке 4
-    # и chat_id в файле curr_conv/Config.py
-    docker build curr_conv .
-
-    # Убедитесь что в файле pg_hba.conf вашего postgres присутствует следующая строка
-
-host    all             all             0.0.0.0/0            md5
-
-    docker run --add-host host.docker.internal:host-gateway -p 2000:2000 curr_conv
-
-    # Чтобы заменить пользователя телеграм, которому отправляется сообщение
-    # В файле curr_conv/Config.py замените параметр chat_id в 15 строке
-    # который вы можете получить у бота @getmyid_bot отправив /start
-    # заменить текст в доккер контейнере вы можете с помощью Vscode - extensions - Remote - Containers
-    # вот инструкция: https://www.howtogeek.com/devops/how-to-edit-code-in-docker-containers-with-visual-studio-code/
-    # затем нужно сделать docker commit curr_conv curr_convimage:version1
-    # и запустить образ
-
-    # Таким же образом можно поменять пользователя базы данных/пароль в строке 4
-
-
-    cd frontend
-    docker build frontend . 
-    docker run -p 3000:3000 frontend
-    # Нажмите на консоль и Enter пару раз, если консоль зависла
-
-    # Затем перейдите на страницу http://127.0.0.1:3000/
-    # Таблица может загрузиться не сразу, подождите некоторое время
-    # Дальше перейдите по ссылке https://docs.google.com/spreadsheets/d/1wCa9s91PxlkQPDS6pxIsR7-2xB7NMDvvmo1VPhaV0Co/edit?usp=sharing
-
-    # и поменяйте какие нибудь значения в таблице
 
 
 3. Запуск готовых доккер образов (доккер образы фронта и бэка весят в общем 2 гб и можете получить их у меня)
