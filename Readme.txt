@@ -32,15 +32,18 @@ host    all             all             0.0.0.0/0            md5
 
     docker run --add-host host.docker.internal:host-gateway -p 2000:2000 curr_conv
 
-    # заменить текст в доккер контейнере вы можете с помощью Vscode - extensions - Remote - Containers
-    # вот инструкция: https://www.howtogeek.com/devops/how-to-edit-code-in-docker-containers-with-visual-studio-code/
-    # затем нужно сделать docker commit curr_conv curr_convimage:version1
-    # и запустить образ
-
-    # Таким же образом можно поменять пользователя базы данных/пароль в строке 4
-
-
+    # Теперь переходим в папку с web страницой на реакте
     cd frontend
+
+    # Устанавливаем зависимости react:
+    npm i react react-dom socket.io-client react-table reactstrap react-table
+    # Либо по очереди
+    npm i react
+    npm i react-dom
+    ...
+    # если не хватило какого-то пакета, просто скачайте его по ошибке в консоли
+
+    # делаем docker build
     docker build frontend . 
     docker run -p 3000:3000 frontend
     # Нажмите на консоль и Enter пару раз, если консоль зависла
