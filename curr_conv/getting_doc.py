@@ -177,4 +177,4 @@ def getting_doc_data():
                 resp1_tup = resp2_tup
                 # постоянно обновляем данные
                 socketio.emit("get_data", result)
-            eventlet.sleep(1)
+            eventlet.sleep(2.5)
