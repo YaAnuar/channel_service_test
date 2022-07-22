@@ -18,7 +18,7 @@ def telegram_sender():
             				'/sendMessage?chat_id='+ chat_id + '&text='		
             info_string = ''
             if dates.count() != 0:
-            	info_string = ' Просрочены закаы:\n'
+            	info_string = ' Просрочены заказы:\n'
             	for dateval in dates:
 	                info_string = info_string + " id = " + str(dateval.id) + ";" \
 	                                        " order_id=" + str(dateval.order_id) + ";" \
