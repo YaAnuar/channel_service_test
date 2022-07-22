@@ -54,26 +54,25 @@ def validate_num(value):
     else:
         return value
 
-# парсим xml для перевода валюты в рубли
+# парсим xml для перевода доллара в рубли
 def parse_xml(time, usd):
-    if time is not None:
-        rub = ''
-        time.replace('.', '/')
-        # парсим наш xml файл для получения курса рубля к долллару
-        xml = requests.get("http://www.cbr.ru/scripts/XML_daily.asp?date_req="+time)
-        root = etree.fromstring(xml.content, parser=parser)
-        for record in root.findall('Valute'):
-            rubval = record.find('Value').text
-            if record.find('CharCode').text == 'USD':
-                rub = rubval.replace(',', '.')
-                break
-        usd = validate_num(usd)
-        if usd is not None and rub != '':
-            rub = "{0:.1f}".format(float(usd)*float(rub))
-        elif rub == '':
-            rub = None
+    rub = ''
+    if time is None:
+        time = ''
+    xml = requests.get("http://www.cbr.ru/scripts/XML_daily.asp?date_req="+time)
+    root = etree.fromstring(xml.content, parser=parser)
+    for record in root.findall('Valute'):
+        rubval = record.find('Value').text
+        if record.find('CharCode').text == 'USD':
+            rub = rubval.replace(',', '.')
+            break
+    usd = validate_num(usd)
+    if usd is not None and rub != '':
+        rub = "{0:.1f}".format(float(usd)*float(rub))
+    elif rub == '':
+        rub = None
 
-        return rub
+    return rub
 
 # перезагружаем данные из документа в базу при перезапуске сервера
 def reload_data(thread_session):
